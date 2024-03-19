@@ -1,49 +1,43 @@
-import {
-    Table,
-    Model,
-    Column,
-    DataType,
-    PrimaryKey,
-  } from "sequelize-typescript";
-  
-  @Table({
-    timestamps: true,
-    tableName: "users",
-    modelName: "User",
+import { Table, Model, Column, DataType } from 'sequelize-typescript';
+
+@Table({
+  tableName: 'users',
+})
+export default class User extends Model{
+ 
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
   })
-  class User extends Model {
-    
-     @Column({
-      primaryKey:true,  
-      type: DataType.UUID,
-      defaultValue: DataType.UUIDV4,
-    }) id: string;
-  
-    @Column({
-      type: DataType.STRING,
-      allowNull: false,
-    })
-    name: string;
-  
-    @Column({
-      type: DataType.STRING,
-      allowNull: false,
-      unique: true,
-    })
-    email: string;
-  
-    @Column({
-      type: DataType.STRING,
-      allowNull: false,
-    })
-    password: string;
-  
-    @Column({
-      type: DataType.ENUM('active', 'inactive'),
-      defaultValue: 'active',
-    })
-    status: 'active' | 'inactive';
-  }
-  
-  export default User;
-  
+ declare id: number;
+
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING // Add this line
+  })
+  declare name: string;
+
+
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare email: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare password: string;
+
+  @Column({
+    type: DataType.ENUM("active", "inactive"),
+    defaultValue: "active",
+  })
+  status!: "active" | "inactive";
+}
+
+
